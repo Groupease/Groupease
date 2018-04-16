@@ -127,7 +127,22 @@ public class DefaultChannelMemberService implements ChannelMemberService {
          * Ensure if "isOwner" is being changed, that current user is a channel admin.
          */
 
-        return memberDao.update(toUpdate);
+        Member editor = getForCurrentUser(toUpdate.getChannel().getId());
+        Member existingMember = getByMemberId(toUpdate.getId());
+
+        if(editor.isOwner() || editor.getId().equals(toUpdate.getId())){   //Is the current user an owner? or editing themself?
+            if(toUpdate.isOwner() == existingMember.isOwner()){ //Changing isOwner?
+                if(editor.isOwner()){
+                    return memberDao.update(toUpdate);
+                } else {
+                    throw new ChannelMemberIdMismatchException(); //has to be an owner to change that
+                }
+            } else {  //not changing owner? Good to update
+                return memberDao.update(toUpdate);
+            }
+        } else {  //Not owner or editing self? Not authorized
+            throw new ChannelMemberIdMismatchException();
+        }
     }
 
     @Nonnull
