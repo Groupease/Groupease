@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.persist.Transactional;
+import io.github.groupease.channel.ChannelService;
 import io.github.groupease.db.MemberDao;
 import io.github.groupease.model.Member;
 import io.github.groupease.user.GroupeaseUser;
@@ -28,6 +29,7 @@ public class DefaultChannelMemberService implements ChannelMemberService {
 
     private final UserService userService;
     private final MemberDao memberDao;
+    private final ChannelService channelService;
 
     /**
      * Injectable constructor.
@@ -38,10 +40,12 @@ public class DefaultChannelMemberService implements ChannelMemberService {
     @Inject
     public DefaultChannelMemberService(
             @Nonnull UserService userService,
-            @Nonnull MemberDao memberDao
+            @Nonnull MemberDao memberDao,
+            @Nonnull ChannelService channelService
     ) {
         this.userService = requireNonNull(userService);
         this.memberDao = requireNonNull(memberDao);
+        this.channelService = requireNonNull(channelService);
     }
 
     @Nonnull
@@ -135,7 +139,7 @@ public class DefaultChannelMemberService implements ChannelMemberService {
                 if(editor.isOwner()){
                     return memberDao.update(toUpdate);
                 } else {
-                    throw new ChannelMemberIdMismatchException(); //has to be an owner to change that
+                    throw new ChannelMemberNotOwnerException("Member must be owner to update isOwner"); //has to be an owner to change that
                 }
             } else {  //not changing owner? Good to update
                 return memberDao.update(toUpdate);
@@ -186,6 +190,9 @@ public class DefaultChannelMemberService implements ChannelMemberService {
 
         if (currentMember.isOwner() || currentMember.getId().equals(memberId)) {
             memberDao.delete(memberToDelete);
+            if(list(channelId).isEmpty()) {
+                channelService.delete(channelId);
+            }
         } else {
             throw new ChannelMemberDeleteForbiddenException();
         }
