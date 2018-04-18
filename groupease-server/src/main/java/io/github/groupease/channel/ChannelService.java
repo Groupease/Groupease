@@ -70,4 +70,13 @@ public interface ChannelService {
             long id
     );
 
+    /**
+     * Delete an existing {@link Channel} instance without checks
+     *
+     * @param id the ID of the {@link Channel} instance to delete.
+     */
+    void deleteNoCheck(
+            long id
+    );
+
 }

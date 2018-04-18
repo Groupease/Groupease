@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import com.codahale.metrics.annotation.Timed;
 import com.google.common.base.Strings;
 import com.google.inject.persist.Transactional;
+import io.github.groupease.channelmember.ChannelMemberService;
 import io.github.groupease.db.MemberDao;
 import io.github.groupease.model.Member;
 import io.github.groupease.user.GroupeaseUser;
@@ -167,6 +168,29 @@ public class DefaultChannelService implements ChannelService {
         if (member == null || !member.isOwner()) {
             throw new ChannelEditByNonOwnerException();
         }
+
+        /* Delete channel. */
+        channelDao.delete(id);
+    }
+
+    @Override
+    @Timed
+    @Transactional
+    public void deleteNoCheck(
+            long id
+    ) {
+        LOGGER.debug("DefaultChannelService.delete({}) called.", id);
+
+        /* Confirm current user is owner of channel. */
+
+        /* Get current user. */
+        GroupeaseUser currentUser = getCurrentUser();
+
+        /* Get channel member. */
+        Member member = memberDao.getForUser(
+                currentUser.getId(),
+                id
+        );
 
         /* Delete channel. */
         channelDao.delete(id);
