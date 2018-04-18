@@ -191,7 +191,7 @@ public class DefaultChannelMemberService implements ChannelMemberService {
         if (currentMember.isOwner() || currentMember.getId().equals(memberId)) {
             memberDao.delete(memberToDelete);
             if(list(channelId).isEmpty()) {
-                channelService.delete(channelId);
+                channelService.deleteNoCheck(channelId);
             }
         } else {
             throw new ChannelMemberDeleteForbiddenException();
