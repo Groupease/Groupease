@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.persist.Transactional;
+import io.github.groupease.channel.ChannelService;
 import io.github.groupease.db.MemberDao;
 import io.github.groupease.model.Member;
 import io.github.groupease.user.GroupeaseUser;
@@ -28,6 +29,7 @@ public class DefaultChannelMemberService implements ChannelMemberService {
 
     private final UserService userService;
     private final MemberDao memberDao;
+    private final ChannelService channelService;
 
     /**
      * Injectable constructor.
@@ -38,10 +40,12 @@ public class DefaultChannelMemberService implements ChannelMemberService {
     @Inject
     public DefaultChannelMemberService(
             @Nonnull UserService userService,
-            @Nonnull MemberDao memberDao
+            @Nonnull MemberDao memberDao,
+            @Nonnull ChannelService channelService
     ) {
         this.userService = requireNonNull(userService);
         this.memberDao = requireNonNull(memberDao);
+        this.channelService = requireNonNull(channelService);
     }
 
     @Nonnull
@@ -127,7 +131,22 @@ public class DefaultChannelMemberService implements ChannelMemberService {
          * Ensure if "isOwner" is being changed, that current user is a channel admin.
          */
 
-        return memberDao.update(toUpdate);
+        Member editor = getForCurrentUser(toUpdate.getChannel().getId());
+        Member existingMember = getByMemberId(toUpdate.getId());
+
+        if(editor.isOwner() || editor.getId().equals(toUpdate.getId())){   //Is the current user an owner? or editing themself?
+            if(toUpdate.isOwner() == existingMember.isOwner()){ //Changing isOwner?
+                if(editor.isOwner()){
+                    return memberDao.update(toUpdate);
+                } else {
+                    throw new ChannelMemberNotOwnerException("Member must be owner to update isOwner"); //has to be an owner to change that
+                }
+            } else {  //not changing owner? Good to update
+                return memberDao.update(toUpdate);
+            }
+        } else {  //Not owner or editing self? Not authorized
+            throw new ChannelMemberIdMismatchException();
+        }
     }
 
     @Nonnull
@@ -171,6 +190,9 @@ public class DefaultChannelMemberService implements ChannelMemberService {
 
         if (currentMember.isOwner() || currentMember.getId().equals(memberId)) {
             memberDao.delete(memberToDelete);
+            if(list(channelId).isEmpty()) {
+                channelService.deleteNoCheck(channelId);
+            }
         } else {
             throw new ChannelMemberDeleteForbiddenException();
         }
