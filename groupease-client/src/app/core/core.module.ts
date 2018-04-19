@@ -9,6 +9,7 @@ import { ChannelInvitationService } from './channel-invitation.service';
 import { GroupService } from './group.service';
 import { MemberService } from './member.service';
 import { GroupInvitationService } from './group-invitation.service';
+import { GroupJoinRequestService } from './group-join-request.service';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { GroupInvitationService } from './group-invitation.service';
     ChannelInvitationService,
     GroupService,
     MemberService,
-    GroupInvitationService
+    GroupInvitationService,
+    GroupJoinRequestService
   ]
 })
 export class CoreModule {

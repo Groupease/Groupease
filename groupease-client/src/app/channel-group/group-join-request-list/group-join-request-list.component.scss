@@ -1,0 +1,22 @@
+.group-join-request-list-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.request-header {
+  display: flex;
+  align-items: center;
+}
+
+.sender-avatar {
+  margin: 8px 16px;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+.sender-name {
+  display: flex;
+  align-items: center;
+}
