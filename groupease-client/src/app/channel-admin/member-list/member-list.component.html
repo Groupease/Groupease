@@ -1,5 +1,104 @@
 <div class="member-list-container">
-  <p>
-    member-list works!
-  </p>
+
+  <mat-accordion>
+
+    <mat-expansion-panel *ngFor="let member of memberListObservable | async">
+
+      <mat-expansion-panel-header class="member-header">
+
+        <img class="member-avatar"
+             [src]="member.groupeaseUser.pictureUrl" />
+
+        <div class="member-name">
+          <span>
+            {{member.groupeaseUser.name}}
+          </span>
+        </div>
+
+      </mat-expansion-panel-header>
+
+      <ng-template matExpansionPanelContent>
+
+        <mat-list>
+
+          <mat-list-item>
+            <mat-icon matListIcon>
+              person
+            </mat-icon>
+            <p matLine>
+              {{member.groupeaseUser.nickname}}
+            </p>
+          </mat-list-item>
+
+          <mat-list-item>
+            <mat-icon matListIcon>
+              mail
+            </mat-icon>
+            <p matLine>
+              {{member.groupeaseUser.email}}
+            </p>
+          </mat-list-item>
+
+          <mat-list-item>
+            <mat-icon matListIcon>
+              settings
+            </mat-icon>
+            <p matLine>
+              Channel Owner: {{member.owner? 'YES' : 'NO'}}
+            </p>
+          </mat-list-item>
+
+          <mat-list-item *ngIf="member.availability">
+            <mat-icon matListIcon>
+              date_range
+            </mat-icon>
+            <p matLine>
+              {{member.availability}}
+            </p>
+          </mat-list-item>
+
+          <mat-list-item *ngIf="member.goals">
+            <mat-icon matListIcon>
+              assessment
+            </mat-icon>
+            <p matLine>
+              {{member.goals}}
+            </p>
+          </mat-list-item>
+
+          <mat-list-item *ngIf="member.skills">
+            <mat-icon matListIcon>
+              done
+            </mat-icon>
+            <p matLine>
+              {{member.skills}}
+            </p>
+          </mat-list-item>
+
+        </mat-list>
+
+        <mat-action-row>
+          <button mat-button
+                  color="warn"
+                  (click)="deleteMember(member)">
+            DELETE
+          </button>
+          <button *ngIf="member.owner"
+                  mat-button
+                  (click)="demoteMember(member)">
+            DEMOTE
+          </button>
+          <button *ngIf="!member.owner"
+                  mat-button
+                  (click)="promoteMember(member)">
+            PROMOTE
+          </button>
+        </mat-action-row>
+
+      </ng-template>
+
+    </mat-expansion-panel>
+
+  </mat-accordion>
+
 </div>
