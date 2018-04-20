@@ -5,7 +5,8 @@
   padding: 20px;
 }
 
-.profile-form-card-content {
+.profile-form-card-content,
+.profile-form-card-content div {
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;

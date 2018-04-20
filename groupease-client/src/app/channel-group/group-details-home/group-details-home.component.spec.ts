@@ -6,7 +6,7 @@ import { Group } from '../../core/group';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Member } from '../../core/member';
-import { MatButtonModule, MatIconModule, MatTooltipModule } from '@angular/material';
+import { MatButtonModule, MatIconModule, MatProgressBarModule, MatTooltipModule } from '@angular/material';
 
 /* Test stub. */
 @Component({selector: 'app-group-summary', template: ''})
@@ -54,6 +54,7 @@ describe('GroupDetailsHomeComponent', () => {
       imports: [
         MatButtonModule,
         MatIconModule,
+        MatProgressBarModule,
         MatTooltipModule
       ]
     })

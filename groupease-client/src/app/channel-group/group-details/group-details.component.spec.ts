@@ -30,4 +30,5 @@ describe('GroupDetailsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

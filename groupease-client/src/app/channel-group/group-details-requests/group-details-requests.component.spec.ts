@@ -5,6 +5,7 @@ import { Component, Input } from '@angular/core';
 import { Group } from '../../core/group';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute } from '@angular/router';
+import { MatProgressBarModule } from '@angular/material';
 
 /* Test stub. */
 @Component({selector: 'app-group-join-request-form', template: ''})
@@ -48,6 +49,9 @@ describe('GroupDetailsRequestsComponent', () => {
             }
           }
         }
+      ],
+      imports: [
+        MatProgressBarModule
       ]
     })
     .compileComponents();

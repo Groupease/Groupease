@@ -1,8 +1,8 @@
 <div class="join-request-list-container">
 
-  <mat-accordion>
+  <mat-accordion *ngIf="channelJoinRequestListObservable | async as channelJoinRequestList; else loading">
 
-    <mat-expansion-panel *ngFor="let channelJoinRequest of channelJoinRequestListObservable | async">
+    <mat-expansion-panel *ngFor="let channelJoinRequest of channelJoinRequestList">
 
       <mat-expansion-panel-header class="request-header">
 
@@ -41,6 +41,15 @@
 
     </mat-expansion-panel>
 
+    <p *ngIf="!channelJoinRequestList.length">
+      There are no pending requests to join this channel.
+    </p>
+
   </mat-accordion>
+
+  <ng-template #loading>
+    <mat-progress-bar mode="indeterminate">
+    </mat-progress-bar>
+  </ng-template>
 
 </div>

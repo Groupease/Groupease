@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InvitationListComponent } from './invitation-list.component';
-import { MatButtonModule, MatExpansionModule, MatIconModule, MatSnackBarModule } from '@angular/material';
+import { MatButtonModule, MatExpansionModule, MatIconModule, MatProgressBarModule, MatSnackBarModule } from '@angular/material';
 import { ChannelInvitationService } from '../../core/channel-invitation.service';
 import { UserService } from '../../core/user.service';
 import { Observable } from 'rxjs/Observable';
@@ -53,6 +53,7 @@ describe('InvitationListComponent', () => {
         MatButtonModule,
         MatExpansionModule,
         MatIconModule,
+        MatProgressBarModule,
         MatSnackBarModule
       ]
     })

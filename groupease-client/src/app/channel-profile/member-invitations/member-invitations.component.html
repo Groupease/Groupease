@@ -4,9 +4,9 @@
     Group invitations
   </h2>
 
-  <mat-accordion>
+  <mat-accordion *ngIf="groupInvitationListObservable | async as groupInvitationList; else loading">
 
-    <mat-expansion-panel *ngFor="let invitation of groupInvitationListObservable | async">
+    <mat-expansion-panel *ngFor="let invitation of groupInvitationList">
 
       <mat-expansion-panel-header class="group-header">
 
@@ -46,6 +46,15 @@
 
     </mat-expansion-panel>
 
+    <p *ngIf="!groupInvitationList.length">
+      You do not have any pending group invitations.
+    </p>
+
   </mat-accordion>
+
+  <ng-template #loading>
+    <mat-progress-bar mode="indeterminate">
+    </mat-progress-bar>
+  </ng-template>
 
 </div>

@@ -1,10 +1,18 @@
-<div class="group-details-requests-container"
-     *ngIf="groupObservable | async as group">
+<div class="group-details-requests-container">
 
-  <app-group-join-request-form [group]="group">
-  </app-group-join-request-form>
+  <ng-container *ngIf="groupObservable | async as group; else loading">
 
-  <app-group-join-request-list [group]="group">
-  </app-group-join-request-list>
+    <app-group-join-request-form [group]="group">
+    </app-group-join-request-form>
+
+    <app-group-join-request-list [group]="group">
+    </app-group-join-request-list>
+
+  </ng-container>
+
+  <ng-template #loading>
+    <mat-progress-bar mode="indeterminate">
+    </mat-progress-bar>
+  </ng-template>
 
 </div>

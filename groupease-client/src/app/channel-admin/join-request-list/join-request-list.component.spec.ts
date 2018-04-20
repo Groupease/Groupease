@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { JoinRequestListComponent } from './join-request-list.component';
-import { MatExpansionModule, MatSnackBarModule } from '@angular/material';
+import { MatExpansionModule, MatProgressBarModule, MatSnackBarModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ChannelJoinRequestService } from '../../core/channel-join-request.service';
 import { ActivatedRoute } from '@angular/router';
@@ -59,6 +59,7 @@ describe('JoinRequestListComponent', () => {
       imports: [
         MatExpansionModule,
         MatSnackBarModule,
+        MatProgressBarModule,
         RouterTestingModule
       ]
     })

@@ -4,9 +4,9 @@
     Groupease Users
   </h2>
 
-  <mat-accordion>
+  <mat-accordion *ngIf="userListObservable | async as userList; else loading">
 
-    <mat-expansion-panel *ngFor="let user of userListObservable | async"
+    <mat-expansion-panel *ngFor="let user of userList"
                          #userPanel="matExpansionPanel">
 
       <mat-expansion-panel-header class="user-header">
@@ -47,6 +47,16 @@
 
     </mat-expansion-panel>
 
+    <p *ngIf="!userList.length">
+      <!-- This should not happen. -->
+      There are no users in the system to invite.
+    </p>
+
   </mat-accordion>
+
+  <ng-template #loading>
+    <mat-progress-bar mode="indeterminate">
+    </mat-progress-bar>
+  </ng-template>
 
 </div>

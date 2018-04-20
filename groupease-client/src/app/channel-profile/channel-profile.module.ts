@@ -12,7 +12,7 @@ import {
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
-  MatListModule,
+  MatListModule, MatProgressBarModule,
   MatSnackBarModule,
   MatTabsModule
 } from '@angular/material';
@@ -30,6 +30,7 @@ import { FormsModule } from '@angular/forms';
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatProgressBarModule,
     MatSnackBarModule,
     MatTabsModule
   ],

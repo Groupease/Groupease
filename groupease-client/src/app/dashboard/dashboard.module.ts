@@ -8,7 +8,7 @@ import {
   MatCardModule,
   MatExpansionModule,
   MatIconModule,
-  MatListModule,
+  MatListModule, MatProgressBarModule,
   MatSnackBarModule,
   MatTabsModule,
   MatTooltipModule
@@ -25,6 +25,7 @@ import { ChannelListComponent } from './channel-list/channel-list.component';
     MatExpansionModule,
     MatIconModule,
     MatListModule,
+    MatProgressBarModule,
     MatSnackBarModule,
     MatTabsModule,
     MatTooltipModule

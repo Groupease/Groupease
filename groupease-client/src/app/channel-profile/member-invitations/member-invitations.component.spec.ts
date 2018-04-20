@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MemberInvitationsComponent } from './member-invitations.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatExpansionModule, MatIconModule, MatSnackBarModule } from '@angular/material';
+import { MatButtonModule, MatExpansionModule, MatIconModule, MatProgressBarModule, MatSnackBarModule } from '@angular/material';
 import { GroupInvitationService } from '../../core/group-invitation.service';
 import { UserService } from '../../core/user.service';
 import { Channel } from '../../core/channel';
@@ -80,6 +80,7 @@ describe('MemberInvitationsComponent', () => {
         MatButtonModule,
         MatExpansionModule,
         MatIconModule,
+        MatProgressBarModule,
         MatSnackBarModule
       ]
     })

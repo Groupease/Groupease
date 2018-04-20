@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { GroupJoinRequestListComponent } from './group-join-request-list.component';
 import { GroupJoinRequestService } from '../../core/group-join-request.service';
 import { Observable } from 'rxjs/Observable';
-import { MatExpansionModule, MatSnackBarModule } from '@angular/material';
+import { MatExpansionModule, MatProgressBarModule, MatSnackBarModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('GroupJoinRequestListComponent', () => {
@@ -32,6 +32,7 @@ describe('GroupJoinRequestListComponent', () => {
       ],
       imports: [
         MatExpansionModule,
+        MatProgressBarModule,
         MatSnackBarModule,
         RouterTestingModule
       ]

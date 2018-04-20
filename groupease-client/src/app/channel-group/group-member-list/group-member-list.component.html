@@ -83,4 +83,9 @@
 
   </mat-expansion-panel>
 
+  <p *ngIf="!members.length">
+    <!-- Edge case: this might appear immediately after the last member left. -->
+    This group has no members.
+  </p>
+
 </mat-accordion>
