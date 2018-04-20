@@ -25,6 +25,8 @@ import { GroupSummaryComponent } from './group-summary/group-summary.component';
 import { GroupMemberListComponent } from './group-member-list/group-member-list.component';
 import { GroupDetailsRequestsComponent } from './group-details-requests/group-details-requests.component';
 import { GroupDetailsInvitationsComponent } from './group-details-invitations/group-details-invitations.component';
+import { GroupJoinRequestListComponent } from './group-join-request-list/group-join-request-list.component';
+import { GroupJoinRequestFormComponent } from './group-join-request-form/group-join-request-form.component';
 
 @NgModule({
   imports: [
@@ -51,7 +53,9 @@ import { GroupDetailsInvitationsComponent } from './group-details-invitations/gr
     GroupSummaryComponent,
     GroupMemberListComponent,
     GroupDetailsRequestsComponent,
-    GroupDetailsInvitationsComponent
+    GroupDetailsInvitationsComponent,
+    GroupJoinRequestListComponent,
+    GroupJoinRequestFormComponent
   ],
   providers: [GroupResolverService]
 })

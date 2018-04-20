@@ -1,3 +1,10 @@
-<p>
-  group-details-requests works!
-</p>
+<div class="group-details-requests-container"
+     *ngIf="groupObservable | async as group">
+
+  <app-group-join-request-form [group]="group">
+  </app-group-join-request-form>
+
+  <app-group-join-request-list [group]="group">
+  </app-group-join-request-list>
+
+</div>
