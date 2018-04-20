@@ -4,3 +4,20 @@
   flex: 1 1 auto;
   padding: 20px;
 }
+
+.member-header {
+  display: flex;
+  align-items: center;
+}
+
+.member-avatar {
+  margin: 8px 16px;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+.member-name {
+  display: flex;
+  align-items: center;
+}
