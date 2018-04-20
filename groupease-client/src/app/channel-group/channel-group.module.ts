@@ -11,7 +11,7 @@ import {
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
-  MatListModule,
+  MatListModule, MatProgressBarModule,
   MatSnackBarModule,
   MatTabsModule,
   MatTooltipModule
@@ -41,6 +41,7 @@ import { GroupJoinRequestFormComponent } from './group-join-request-form/group-j
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatProgressBarModule,
     MatSnackBarModule,
     MatTabsModule,
     MatTooltipModule

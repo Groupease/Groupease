@@ -10,7 +10,7 @@ import {
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
-  MatListModule,
+  MatListModule, MatProgressBarModule,
   MatSnackBarModule,
   MatTooltipModule
 } from '@angular/material';
@@ -29,6 +29,7 @@ import { FormsModule } from '@angular/forms';
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatProgressBarModule,
     MatSnackBarModule,
     MatTooltipModule
   ],

@@ -9,7 +9,14 @@ import { Group } from '../../core/group';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute } from '@angular/router';
 import { GroupInvitationService } from '../../core/group-invitation.service';
-import { MatButtonModule, MatExpansionModule, MatIconModule, MatListModule, MatSnackBarModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatExpansionModule,
+  MatIconModule,
+  MatListModule,
+  MatProgressBarModule,
+  MatSnackBarModule
+} from '@angular/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('GroupDetailsInvitationsComponent', () => {
@@ -89,6 +96,7 @@ describe('GroupDetailsInvitationsComponent', () => {
         MatExpansionModule,
         MatIconModule,
         MatListModule,
+        MatProgressBarModule,
         MatSnackBarModule
       ]
     })

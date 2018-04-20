@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { Group } from '../../core/group';
 import { GroupJoinRequestService } from '../../core/group-join-request.service';
 import { MatSnackBar } from '@angular/material';

@@ -5,7 +5,14 @@ import { GroupService } from '../../core/group.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Channel } from '../../core/channel';
-import { MatButtonModule, MatChipsModule, MatExpansionModule, MatIconModule, MatTooltipModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatChipsModule,
+  MatExpansionModule,
+  MatIconModule,
+  MatProgressBarModule,
+  MatTooltipModule
+} from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ChannelGroupDirectoryComponent', () => {
@@ -60,6 +67,7 @@ describe('ChannelGroupDirectoryComponent', () => {
         MatChipsModule,
         MatExpansionModule,
         MatIconModule,
+        MatProgressBarModule,
         MatTooltipModule,
         RouterTestingModule
       ]

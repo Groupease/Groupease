@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 import { GroupInvitationService } from '../../core/group-invitation.service';
 import { MemberService } from '../../core/member.service';
 import { Group } from '../../core/group';

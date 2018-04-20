@@ -5,19 +5,19 @@ import { Channel } from '../../core/channel';
 import { ChannelJoinRequest } from '../../core/channel-join-request';
 import { ChannelJoinRequestService } from '../../core/channel-join-request.service';
 import { MatExpansionPanel, MatSnackBar } from '@angular/material';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-channel-directory',
   templateUrl: './channel-directory.component.html',
   styleUrls: ['./channel-directory.component.scss']
 })
-export class ChannelDirectoryComponent implements OnInit, OnDestroy {
+export class ChannelDirectoryComponent implements OnInit {
 
   /* Apply groupease-view CSS class to the component element. */
   @HostBinding('class.groupease-view') true;
 
-  channels: Array<Channel>;
-  channelSubscription: Subscription;
+  channelListObservable: Observable<Channel[]>;
 
   constructor(
     private channelService: ChannelService,
@@ -26,14 +26,7 @@ export class ChannelDirectoryComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.channelSubscription = this.channelService.listAll()
-      .subscribe(
-        channels => this.channels = channels
-      );
-  }
-
-  ngOnDestroy(): void {
-    this.channelSubscription.unsubscribe();
+    this.channelListObservable = this.channelService.listAll();
   }
 
   sendJoinRequest(

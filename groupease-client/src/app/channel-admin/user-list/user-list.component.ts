@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from '../../core/user.service';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../../core/user';
@@ -7,17 +7,20 @@ import { ActivatedRoute } from '@angular/router';
 import { ChannelInvitationService } from '../../core/channel-invitation.service';
 import { ChannelInvitation } from '../../core/channel-invitation';
 import { MatExpansionPanel, MatSnackBar } from '@angular/material';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })
-export class UserListComponent implements OnInit {
+export class UserListComponent implements OnInit, OnDestroy {
 
   userListObservable: Observable<User[]>;
 
   private channel: Channel;
+
+  private subscription: Subscription;
 
   constructor(
     private userService: UserService,
@@ -29,11 +32,15 @@ export class UserListComponent implements OnInit {
   ngOnInit(): void {
     this.userListObservable = this.userService.listAll();
 
-    this.route.parent.parent.parent.data.subscribe(
+    this.subscription = this.route.parent.parent.parent.data.subscribe(
       (data: { channel: Channel }) => {
         this.channel = data.channel;
       }
     );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   invite(

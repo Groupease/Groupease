@@ -6,22 +6,23 @@
     Groupease
   </a>
 
-  <a *ngIf="authService.isAuthenticated()"
-          [routerLink]="['/views/dashboard']"
-          mat-button>
-    Dashboard
-  </a>
+  <ng-container *ngIf="authService.isAuthenticated(); else noAuth">
+    <a [routerLink]="['/views/dashboard']"
+       mat-button>
+      Dashboard
+    </a>
 
-  <button *ngIf="!authService.isAuthenticated()"
-          (click)="authService.login()"
-          mat-button>
-    Sign in
-  </button>
+    <button (click)="authService.logout()"
+            mat-button>
+      Sign out
+    </button>
+  </ng-container>
 
-  <button *ngIf="authService.isAuthenticated()"
-          (click)="authService.logout()"
-          mat-button>
-    Sign out
-  </button>
+  <ng-template #noAuth>
+    <button (click)="authService.login()"
+            mat-button>
+      Sign in
+    </button>
+  </ng-template>
 
 </mat-toolbar>

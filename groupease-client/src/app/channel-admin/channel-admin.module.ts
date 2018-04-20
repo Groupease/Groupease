@@ -11,7 +11,7 @@ import {
   MatCardModule,
   MatExpansionModule,
   MatIconModule,
-  MatListModule,
+  MatListModule, MatProgressBarModule,
   MatSnackBarModule,
   MatTabsModule
 } from '@angular/material';
@@ -25,6 +25,7 @@ import {
     MatExpansionModule,
     MatIconModule,
     MatListModule,
+    MatProgressBarModule,
     MatSnackBarModule,
     MatTabsModule
   ],

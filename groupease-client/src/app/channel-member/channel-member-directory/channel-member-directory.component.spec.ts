@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ChannelMemberDirectoryComponent } from './channel-member-directory.component';
-import { MatExpansionModule, MatIconModule, MatListModule } from '@angular/material';
+import { MatExpansionModule, MatIconModule, MatListModule, MatProgressBarModule } from '@angular/material';
 import { MemberService } from '../../core/member.service';
 import { Member } from '../../core/member';
 import { Channel } from '../../core/channel';
@@ -66,7 +66,8 @@ describe('ChannelMemberDirectoryComponent', () => {
         NoopAnimationsModule,
         MatExpansionModule,
         MatIconModule,
-        MatListModule
+        MatListModule,
+        MatProgressBarModule
       ]
     })
     .compileComponents();

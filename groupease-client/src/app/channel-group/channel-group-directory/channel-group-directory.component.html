@@ -4,9 +4,9 @@
     Channel Groups
   </h1>
 
-  <mat-accordion>
+  <mat-accordion *ngIf="groupListObservable | async as groupList; else loading">
 
-    <mat-expansion-panel *ngFor="let group of groupListObservable | async"
+    <mat-expansion-panel *ngFor="let group of groupList"
                          #groupPanel="matExpansionPanel">
 
       <mat-expansion-panel-header class="group-header">
@@ -69,7 +69,16 @@
 
     </mat-expansion-panel>
 
+    <p *ngIf="!groupList.length">
+      There are no groups in this channel. Create one!
+    </p>
+
   </mat-accordion>
+
+  <ng-template #loading>
+    <mat-progress-bar mode="indeterminate">
+    </mat-progress-bar>
+  </ng-template>
 
   <div class="groupease-fab-container">
     <a mat-fab

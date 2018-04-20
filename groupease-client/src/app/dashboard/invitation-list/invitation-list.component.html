@@ -1,8 +1,8 @@
 <div class="invitation-list-container">
 
-  <mat-accordion>
+  <mat-accordion *ngIf="channelInvitationListObservable | async as channelInvitationList; else loading">
 
-    <mat-expansion-panel *ngFor="let channelInvitation of channelInvitationListObservable | async">
+    <mat-expansion-panel *ngFor="let channelInvitation of channelInvitationList">
 
       <mat-expansion-panel-header class="invitation-header">
 
@@ -43,6 +43,15 @@
 
     </mat-expansion-panel>
 
+    <p *ngIf="!channelInvitationList.length">
+      You do not have any channel invitations.
+    </p>
+
   </mat-accordion>
+
+  <ng-template #loading>
+    <mat-progress-bar mode="indeterminate">
+    </mat-progress-bar>
+  </ng-template>
 
 </div>

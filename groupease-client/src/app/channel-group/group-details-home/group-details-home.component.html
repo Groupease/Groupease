@@ -1,11 +1,16 @@
 <div class="group-details-home-container"
-     *ngIf="groupObservable | async as group">
+     *ngIf="groupObservable | async as group; else loading">
 
   <app-group-summary [group]="group"></app-group-summary>
 
   <app-group-member-list [members]="group.members"></app-group-member-list>
 
 </div>
+
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate">
+  </mat-progress-bar>
+</ng-template>
 
 <div class="groupease-fab-container">
   <a mat-fab

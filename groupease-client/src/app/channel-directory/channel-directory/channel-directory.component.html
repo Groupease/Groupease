@@ -4,9 +4,9 @@
     Channel Directory
   </h1>
 
-  <mat-accordion>
+  <mat-accordion *ngIf="channelListObservable | async as channelList; else loading">
 
-    <mat-expansion-panel *ngFor="let channel of channels"
+    <mat-expansion-panel *ngFor="let channel of channelList"
                          #channelPanel="matExpansionPanel">
 
       <mat-expansion-panel-header>
@@ -65,7 +65,16 @@
 
     </mat-expansion-panel>
 
+    <p *ngIf="!channelList.length">
+      There are no channels in the system. Create one!
+    </p>
+
   </mat-accordion>
+
+  <ng-template #loading>
+    <mat-progress-bar mode="indeterminate">
+    </mat-progress-bar>
+  </ng-template>
 
   <div class="groupease-fab-container">
     <a mat-fab

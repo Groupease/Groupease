@@ -1,5 +1,4 @@
-<div *ngIf="member"
-     class="profile-form-container">
+<div class="profile-form-container">
 
   <form #memberForm="ngForm"
         (ngSubmit)="onSubmit()">
@@ -12,45 +11,47 @@
 
       <mat-card-content class="profile-form-card-content">
 
-        <mat-list class="profile-fields-list">
+        <div *ngIf="member; else loading">
 
-          <mat-list-item>
-            <img matListAvatar [src]="member.groupeaseUser.pictureUrl" />
-            <p matLine>
-              {{member.groupeaseUser.name}}
-            </p>
-          </mat-list-item>
+          <mat-list class="profile-fields-list">
 
-          <mat-list-item>
-            <mat-icon matListIcon>
-              person
-            </mat-icon>
-            <p matLine>
-              {{member.groupeaseUser.nickname}}
-            </p>
-          </mat-list-item>
+            <mat-list-item>
+              <img matListAvatar [src]="member.groupeaseUser.pictureUrl" />
+              <p matLine>
+                {{member.groupeaseUser.name}}
+              </p>
+            </mat-list-item>
 
-          <mat-list-item>
-            <mat-icon matListIcon>
-              mail
-            </mat-icon>
-            <p matLine>
-              {{member.groupeaseUser.email}}
-            </p>
-          </mat-list-item>
+            <mat-list-item>
+              <mat-icon matListIcon>
+                person
+              </mat-icon>
+              <p matLine>
+                {{member.groupeaseUser.nickname}}
+              </p>
+            </mat-list-item>
 
-          <mat-list-item>
-            <mat-icon matListIcon>
-              settings
-            </mat-icon>
-            <p matLine>
-              Channel Owner: {{member.owner? 'YES' : 'NO'}}
-            </p>
-          </mat-list-item>
+            <mat-list-item>
+              <mat-icon matListIcon>
+                mail
+              </mat-icon>
+              <p matLine>
+                {{member.groupeaseUser.email}}
+              </p>
+            </mat-list-item>
 
-        </mat-list>
+            <mat-list-item>
+              <mat-icon matListIcon>
+                settings
+              </mat-icon>
+              <p matLine>
+                Channel Owner: {{member.owner? 'YES' : 'NO'}}
+              </p>
+            </mat-list-item>
 
-        <mat-form-field>
+          </mat-list>
+
+          <mat-form-field>
 
           <textarea matInput
                     name="availability"
@@ -58,26 +59,26 @@
                     #availability="ngModel"
                     matTextareaAutosize></textarea>
 
-          <mat-placeholder>
-            <mat-icon>
-              date_range
-            </mat-icon>
-            <span>
+            <mat-placeholder>
+              <mat-icon>
+                date_range
+              </mat-icon>
+              <span>
               Availability
             </span>
-          </mat-placeholder>
+            </mat-placeholder>
 
-          <mat-hint>
-            When you are available to work (e.g. "Weekdays 6-10pm")
-          </mat-hint>
+            <mat-hint>
+              When you are available to work (e.g. "Weekdays 6-10pm")
+            </mat-hint>
 
-          <mat-error *ngIf="availability.invalid">
-            Availability is invalid
-          </mat-error>
+            <mat-error *ngIf="availability.invalid">
+              Availability is invalid
+            </mat-error>
 
-        </mat-form-field>
+          </mat-form-field>
 
-        <mat-form-field>
+          <mat-form-field>
 
           <textarea matInput
                     name="goals"
@@ -85,26 +86,26 @@
                     #goals="ngModel"
                     matTextareaAutosize></textarea>
 
-          <mat-placeholder>
-            <mat-icon>
-              assessment
-            </mat-icon>
-            <span>
+            <mat-placeholder>
+              <mat-icon>
+                assessment
+              </mat-icon>
+              <span>
               Goals
             </span>
-          </mat-placeholder>
+            </mat-placeholder>
 
-          <mat-hint>
-            Your goals for this channel (e.g. "Learn Angular" or "Get an 'A'")
-          </mat-hint>
+            <mat-hint>
+              Your goals for this channel (e.g. "Learn Angular" or "Get an 'A'")
+            </mat-hint>
 
-          <mat-error *ngIf="goals.invalid">
-            Goals are invalid
-          </mat-error>
+            <mat-error *ngIf="goals.invalid">
+              Goals are invalid
+            </mat-error>
 
-        </mat-form-field>
+          </mat-form-field>
 
-        <mat-form-field>
+          <mat-form-field>
 
           <textarea matInput
                     name="skills"
@@ -112,28 +113,35 @@
                     #skills="ngModel"
                     matTextareaAutosize></textarea>
 
-          <mat-placeholder>
-            <mat-icon>
-              done
-            </mat-icon>
-            <span>
+            <mat-placeholder>
+              <mat-icon>
+                done
+              </mat-icon>
+              <span>
               Skills
             </span>
-          </mat-placeholder>
+            </mat-placeholder>
 
-          <mat-hint>
-            Your strengths that may be relevant within this channel (e.g. "Developing Java web apps")
-          </mat-hint>
+            <mat-hint>
+              Your strengths that may be relevant within this channel (e.g. "Developing Java web apps")
+            </mat-hint>
 
-          <mat-error *ngIf="skills.invalid">
-            Skills are invalid
-          </mat-error>
+            <mat-error *ngIf="skills.invalid">
+              Skills are invalid
+            </mat-error>
 
-        </mat-form-field>
+          </mat-form-field>
+
+        </div>
+
+        <ng-template #loading>
+          <mat-progress-bar mode="indeterminate">
+          </mat-progress-bar>
+        </ng-template>
 
       </mat-card-content>
 
-      <mat-card-actions>
+      <mat-card-actions *ngIf="member">
 
         <button mat-button
                 type="reset">
@@ -154,4 +162,3 @@
   </form>
 
 </div>
-

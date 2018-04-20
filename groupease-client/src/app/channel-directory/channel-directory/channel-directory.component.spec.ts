@@ -8,6 +8,7 @@ import {
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
+  MatProgressBarModule,
   MatSnackBarModule,
   MatTooltipModule
 } from '@angular/material';
@@ -60,6 +61,7 @@ describe('ChannelDirectoryComponent', () => {
         MatExpansionModule,
         MatIconModule,
         MatInputModule,
+        MatProgressBarModule,
         MatSnackBarModule,
         MatTooltipModule
       ]

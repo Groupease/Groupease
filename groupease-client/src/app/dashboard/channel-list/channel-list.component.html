@@ -6,19 +6,32 @@
       Member Channels
     </h1>
 
-    <a [routerLink]="['/views/channels', channel.id]"
-       mat-list-item
-       *ngFor="let channel of channelListObservable | async">
+    <ng-container *ngIf="channelListObservable | async as channelList; else loading">
 
-      <mat-icon matListIcon>
-        domain
-      </mat-icon>
+      <a [routerLink]="['/views/channels', channel.id]"
+         mat-list-item
+         *ngFor="let channel of channelList">
 
-      <h2 matLine>
-        {{channel.name}}
-      </h2>
+        <mat-icon matListIcon>
+          domain
+        </mat-icon>
 
-    </a>
+        <h2 matLine>
+          {{channel.name}}
+        </h2>
+
+      </a>
+
+      <p *ngIf="!channelList.length">
+        You are not a member of any channels. Add one!
+      </p>
+
+    </ng-container>
+
+    <ng-template #loading>
+      <mat-progress-bar mode="indeterminate">
+      </mat-progress-bar>
+    </ng-template>
 
   </mat-nav-list>
 

@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserListComponent } from './user-list.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MatExpansionModule, MatSnackBarModule } from '@angular/material';
+import { MatExpansionModule, MatProgressBarModule, MatSnackBarModule } from '@angular/material';
 import { UserService } from '../../core/user.service';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute } from '@angular/router';
@@ -71,6 +71,7 @@ describe('UserListComponent', () => {
       imports: [
         MatExpansionModule,
         MatSnackBarModule,
+        MatProgressBarModule,
         RouterTestingModule
       ]
     })

@@ -4,9 +4,9 @@
     Channel members
   </h2>
 
-  <mat-accordion>
+  <mat-accordion *ngIf="memberListObservable | async as memberList; else loading">
 
-    <mat-expansion-panel *ngFor="let member of memberListObservable | async"
+    <mat-expansion-panel *ngFor="let member of memberList"
                          #memberPanel="matExpansionPanel">
 
       <mat-expansion-panel-header class="member-header">
@@ -101,6 +101,15 @@
 
     </mat-expansion-panel>
 
+    <p *ngIf="!memberList.length">
+      There are no channel members to invite.
+    </p>
+
   </mat-accordion>
+
+  <ng-template #loading>
+    <mat-progress-bar mode="indeterminate">
+    </mat-progress-bar>
+  </ng-template>
 
 </div>

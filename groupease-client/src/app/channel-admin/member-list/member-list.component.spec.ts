@@ -8,7 +8,14 @@ import { MemberService } from '../../core/member.service';
 import { Member } from '../../core/member';
 import { User } from '../../core/user';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatExpansionModule, MatIconModule, MatListModule, MatSnackBarModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatExpansionModule,
+  MatIconModule,
+  MatListModule,
+  MatProgressBarModule,
+  MatSnackBarModule
+} from '@angular/material';
 
 describe('MemberListComponent', () => {
   let component: MemberListComponent;
@@ -70,6 +77,7 @@ describe('MemberListComponent', () => {
         MatExpansionModule,
         MatIconModule,
         MatListModule,
+        MatProgressBarModule,
         MatSnackBarModule
       ]
     })

@@ -4,9 +4,9 @@
     Pending Group Requests
   </h1>
 
-  <mat-accordion>
+  <mat-accordion *ngIf="groupJoinRequestListObservable | async as groupJoinRequestList; else loading">
 
-    <mat-expansion-panel *ngFor="let groupJoinRequest of groupJoinRequestListObservable | async">
+    <mat-expansion-panel *ngFor="let groupJoinRequest of groupJoinRequestList">
 
       <mat-expansion-panel-header class="request-header">
 
@@ -45,6 +45,15 @@
 
     </mat-expansion-panel>
 
+    <p *ngIf="!groupJoinRequestList.length">
+      There are no pending requests to join this group.
+    </p>
+
   </mat-accordion>
+
+  <ng-template #loading>
+    <mat-progress-bar mode="indeterminate">
+    </mat-progress-bar>
+  </ng-template>
 
 </div>
