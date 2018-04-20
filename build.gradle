@@ -29,9 +29,11 @@ flyway {
     locations = ['filesystem:db/migration']
 }
 
-/* Migrate DB when stage task runs. */
+/*
+ * Migrate DB when stage task runs.
+ * NOTE: If it is desired to ever wipe the DB, run the flywayClean task.
+ */
 task stage() {
-    dependsOn flywayClean
     dependsOn flywayMigrate
 }
 
