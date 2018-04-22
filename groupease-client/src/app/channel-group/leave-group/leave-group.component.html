@@ -1,0 +1,46 @@
+<div class="leave-group-container">
+
+  <mat-card>
+
+    <mat-card-title>
+      Leave group
+    </mat-card-title>
+
+    <ng-container *ngIf="groupMemberStatusObservable | async as groupMemberStatus; else loading">
+
+      <mat-card-content>
+
+        <h2 *ngIf="groupMemberStatus.currentlyInGroup; else notInGroup">
+          Leaving this group cannot be undone.
+          Are you sure you wish to leave?
+        </h2>
+
+        <ng-template #notInGroup>
+          <h2>
+            You are not a member of this group.
+          </h2>
+        </ng-template>
+
+      </mat-card-content>
+
+      <mat-card-actions align="end">
+        <button mat-button
+                color="warn"
+                (click)="leaveGroup(groupMemberStatus)"
+                [disabled]="!groupMemberStatus.currentlyInGroup">
+          LEAVE GROUP
+        </button>
+      </mat-card-actions>
+
+    </ng-container>
+
+    <ng-template #loading>
+      <mat-card-content>
+        <mat-progress-bar mode="indeterminate">
+        </mat-progress-bar>
+      </mat-card-content>
+    </ng-template>
+
+  </mat-card>
+
+</div>

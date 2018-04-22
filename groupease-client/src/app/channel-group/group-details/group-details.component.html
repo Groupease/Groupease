@@ -23,6 +23,13 @@
       Invitations
     </a>
 
+    <a mat-tab-link
+       routerLink="leave"
+       routerLinkActive #leaveRoute="routerLinkActive"
+       [active]="leaveRoute.isActive">
+      Leave Group
+    </a>
+
   </nav>
 
   <router-outlet></router-outlet>

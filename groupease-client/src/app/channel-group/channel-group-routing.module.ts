@@ -7,6 +7,7 @@ import { GroupResolverService } from './group-resolver.service';
 import { GroupDetailsHomeComponent } from './group-details-home/group-details-home.component';
 import { GroupDetailsRequestsComponent } from './group-details-requests/group-details-requests.component';
 import { GroupDetailsInvitationsComponent } from './group-details-invitations/group-details-invitations.component';
+import { LeaveGroupComponent } from './leave-group/leave-group.component';
 
 const channelGroupRoutes: Routes = [
   {
@@ -35,6 +36,10 @@ const channelGroupRoutes: Routes = [
       {
         path: 'invitations',
         component: GroupDetailsInvitationsComponent
+      },
+      {
+        path: 'leave',
+        component: LeaveGroupComponent
       },
       {
         path: '',
