@@ -126,27 +126,28 @@ public class DefaultChannelMemberService implements ChannelMemberService {
         );
 
         /*
-         * TODO: Get member & confirm access. See delete method below for example.
-         * Additional check:
          * Ensure if "isOwner" is being changed, that current user is a channel admin.
+         * Also ensure non-owners can only edit their own profile.
          */
 
         Member editor = getForCurrentUser(toUpdate.getChannel().getId());
-        Member existingMember = getByMemberId(toUpdate.getId());
 
-        if(editor.isOwner() || editor.getId().equals(toUpdate.getId())){   //Is the current user an owner? or editing themself?
-            if(toUpdate.isOwner() == existingMember.isOwner()){ //Changing isOwner?
-                if(editor.isOwner()){
-                    return memberDao.update(toUpdate);
-                } else {
-                    throw new ChannelMemberNotOwnerException("Member must be owner to update isOwner"); //has to be an owner to change that
-                }
-            } else {  //not changing owner? Good to update
-                return memberDao.update(toUpdate);
+        if (!editor.isOwner()) {
+            /* Checks are only needed for non-owners. */
+
+            if (!editor.getId().equals(toUpdate.getId())) {
+                /* Non-admin is editing someone else's profile. */
+                throw new MemberEditForbiddenException("Non admin cannot edit a different channel member.");
             }
-        } else {  //Not owner or editing self? Not authorized
-            throw new ChannelMemberIdMismatchException();
+
+            if (toUpdate.isOwner()) {
+                /* Current user is not an owner, but they have tried to become one. */
+                throw new ChannelMemberNotOwnerException("Member must be owner to update isOwner");
+            }
         }
+
+        /* All checks passed. */
+        return memberDao.update(toUpdate);
     }
 
     @Nonnull

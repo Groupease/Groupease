@@ -1,27 +1,26 @@
 package io.github.groupease.channelmember;
 
-import io.github.groupease.exception.ActionForbiddenException;
-import io.github.groupease.exception.ValidationException;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 
+import io.github.groupease.exception.ActionForbiddenException;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
- * Exception thrown when a non-admin channel member is doing an action only for owners.
+ * Exception thrown when a user that is not a channel admin on the channel tries to modify it.
  */
 @Immutable
-public class ChannelMemberNotOwnerException extends ActionForbiddenException {
+public class MemberEditForbiddenException extends ActionForbiddenException {
 
     /**
      * Constructs a new runtime exception with {@code null} as its
      * detail message.  The cause is not initialized, and may subsequently be
      * initialized by a call to {@link #initCause}.
      */
-    public ChannelMemberNotOwnerException() {
+    public MemberEditForbiddenException() {
     }
 
     /**
@@ -32,7 +31,7 @@ public class ChannelMemberNotOwnerException extends ActionForbiddenException {
      * @param message the detail message. The detail message is saved for
      *                later retrieval by the {@link #getMessage()} method.
      */
-    public ChannelMemberNotOwnerException(
+    public MemberEditForbiddenException(
             @Nullable String message
     ) {
         super(message);
@@ -52,7 +51,7 @@ public class ChannelMemberNotOwnerException extends ActionForbiddenException {
      *                unknown.)
      * @since 1.4
      */
-    public ChannelMemberNotOwnerException(
+    public MemberEditForbiddenException(
             @Nullable String message,
             @Nullable Throwable cause
     ) {
@@ -72,7 +71,7 @@ public class ChannelMemberNotOwnerException extends ActionForbiddenException {
      *              unknown.)
      * @since 1.4
      */
-    public ChannelMemberNotOwnerException(
+    public MemberEditForbiddenException(
             @Nullable Throwable cause
     ) {
         super(cause);
@@ -92,7 +91,7 @@ public class ChannelMemberNotOwnerException extends ActionForbiddenException {
      *                           be writable
      * @since 1.7
      */
-    public ChannelMemberNotOwnerException(
+    public MemberEditForbiddenException(
             @Nullable String message,
             @Nullable Throwable cause,
             boolean enableSuppression,
@@ -113,8 +112,8 @@ public class ChannelMemberNotOwnerException extends ActionForbiddenException {
         return HashCodeBuilder.reflectionHashCode(this);
     }
 
-    @Nonnull
     @Override
+    @Nonnull
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
     }
