@@ -140,7 +140,7 @@ public class GroupWebService {
      * Updates a {@link Group}
      * @param channelId The ID of the channel the group is part of
      * @param groupId The ID of the group
-     * @param updateGroup The changes to make to an existing {@link Group} constructed from the POSTed JSON
+     * @param updateGroup The changes to make to an existing {@link Group} constructed from the uploaded JSON
      * @return The revised group object
      */
     @PUT
@@ -201,14 +201,24 @@ public class GroupWebService {
             throw new NotGroupMemberException("Only group members can make changes to a group");
         }
 
-        // Look at the POSTed members list. If the members list is empty, we'll just try updating the name
-        // and description. If the members list supplied isn't empty, then we need to investigate it. The
-        // only change allowed is for the user to remove himself (leave the group)
+        // Look at the uploaded members list. If it is empty and the database only has one member then we need to
+        // remove the group
         if(updateGroup.getMembers().isEmpty())
         {
-            LOGGER.debug("GroupWebService.update *** No JSON member list so updating name and description only");
-            existingGroup.setName(updateGroup.getName());
-            existingGroup.setDescription(updateGroup.getDescription());
+            LOGGER.debug("GroupWebService.update *** No JSON member list");
+            if(existingGroup.getMembers().size() != 1)
+            {
+                throw new InvalidGroupModificationException(
+                        "You can only attempt to delete the group by sending an empty membership list when you are the last member");
+            }
+            else
+            {
+                // The group only has one user in the database and that user is the current user. (If the current user
+                // isn't the only user remaining, he wouldn't have gotten past the membership check above) Since the last
+                // member is leaving, delete the group
+                groupDao.delete(existingGroup);
+                return null;
+            }
         }
         else
         {
